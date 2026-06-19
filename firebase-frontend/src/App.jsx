@@ -43,8 +43,7 @@ export default function App() {
   const [searchLocation, setSearchLocation] = useState('');
   const [searchIndustry, setSearchIndustry] = useState('');
   const [searchDaysOld, setSearchDaysOld] = useState('15');
-  const [lastSearchTime, setLastSearchTime] = useState(null);
-  const [lastSearchQuery, setLastSearchQuery] = useState('');
+  const [lastSearchTime, setLastSearchTime] = useState('');
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [expandedJobs, setExpandedJobs] = useState({});
   const [editingApp, setEditingApp] = useState(null);
@@ -55,25 +54,6 @@ export default function App() {
     interviewing: 0,
     rejected: 0,
   });
-
-  // Load persisted search from localStorage on mount
-  useEffect(() => {
-    const savedSearch = localStorage.getItem('jobSearch');
-    if (savedSearch) {
-      try {
-        const { searchJob: sj, searchLocation: sl, searchIndustry: si, searchDaysOld: sd, jobs: j, lastSearchTime: lst, lastSearchQuery: lsq } = JSON.parse(savedSearch);
-        setSearchJob(sj);
-        setSearchLocation(sl);
-        setSearchIndustry(si);
-        setSearchDaysOld(sd);
-        setJobs(j);
-        setLastSearchTime(lst);
-        setLastSearchQuery(lsq);
-      } catch (err) {
-        console.log('Could not load saved search');
-      }
-    }
-  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -117,8 +97,7 @@ export default function App() {
       setStats({
         total: appList.length,
         applied: appList.filter((a) => a.status === 'applied').length,
-        interviewing: appList.filter((a) => a.status === 'interviewing')
-          .length,
+        interviewing: appList.filter((a) => a.status === 'interviewing').length,
         rejected: appList.filter((a) => a.status === 'rejected').length,
       });
     } catch (err) {
@@ -158,7 +137,6 @@ export default function App() {
     try {
       await signOut(auth);
       setActiveTab('cv');
-      localStorage.removeItem('jobSearch');
     } catch (err) {
       setError(err.message);
     }
@@ -300,18 +278,6 @@ export default function App() {
       const filteredJobs = filterJobsByDate(data.data || []);
       setJobs(filteredJobs);
       setLastSearchTime(new Date().toLocaleString());
-      setLastSearchQuery(query);
-
-      // Save to localStorage
-      localStorage.setItem('jobSearch', JSON.stringify({
-        searchJob,
-        searchLocation,
-        searchIndustry,
-        searchDaysOld,
-        jobs: filteredJobs,
-        lastSearchTime: new Date().toLocaleString(),
-        lastSearchQuery: query,
-      }));
 
       if (filteredJobs.length === 0) {
         setError(`No jobs found posted in the last ${searchDaysOld} days`);
@@ -329,10 +295,8 @@ export default function App() {
     setSearchLocation('');
     setSearchIndustry('');
     setSearchDaysOld('15');
-    setLastSearchTime(null);
-    setLastSearchQuery('');
+    setLastSearchTime('');
     setError('');
-    localStorage.removeItem('jobSearch');
   };
 
   const handleAutoTailorJob = async (job) => {
@@ -658,25 +622,19 @@ export default function App() {
             {jobs.length > 0 && (
               <div style={{ 
                 backgroundColor: '#1e293b', 
-                border: '1px solid #4ade80', 
+                border: '2px solid #4ade80', 
                 borderRadius: '6px', 
                 padding: '1rem', 
                 marginBottom: '1.5rem' 
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <p style={{ color: '#4ade80', fontWeight: 'bold', margin: '0 0 0.5rem 0' }}>
-                      ✓ Results Cached
+                    <p style={{ color: '#4ade80', fontWeight: 'bold', margin: '0 0 0.5rem 0', fontSize: '1rem' }}>
+                      ✓ RESULTS CACHED - {jobs.length} jobs found
                     </p>
-                    <p style={{ color: '#9ca3af', margin: '0 0 0.25rem 0' }}>
-                      Found {jobs.length} jobs
-                    </p>
-                    <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0' }}>
-                      Last searched: {lastSearchTime}
-                    </p>
-                    {lastSearchQuery && (
-                      <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0.25rem 0 0 0' }}>
-                        Query: "{lastSearchQuery}"
+                    {lastSearchTime && (
+                      <p style={{ color: '#9ca3af', fontSize: '0.9rem', margin: '0' }}>
+                        Last searched: {lastSearchTime}
                       </p>
                     )}
                   </div>
