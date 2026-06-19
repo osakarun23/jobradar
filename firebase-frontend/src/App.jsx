@@ -39,7 +39,6 @@ export default function App() {
   const [jobs, setJobs] = useState([]);
   const [searchJob, setSearchJob] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
-  const [searchRadius, setSearchRadius] = useState('');
   const [expandedJobs, setExpandedJobs] = useState({});
   const [editingApp, setEditingApp] = useState(null);
   const [stats, setStats] = useState({
@@ -49,7 +48,6 @@ export default function App() {
     rejected: 0,
   });
 
-  // Auth state listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -57,7 +55,6 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // Fetch CVs
   const fetchCVs = useCallback(async () => {
     if (!user) return;
     try {
@@ -77,7 +74,6 @@ export default function App() {
     fetchCVs();
   }, [user, fetchCVs]);
 
-  // Fetch Applications
   const fetchApplications = useCallback(async () => {
     if (!user) return;
     try {
@@ -91,8 +87,6 @@ export default function App() {
         ...doc.data(),
       }));
       setApplications(appList);
-
-      // Update stats
       setStats({
         total: appList.length,
         applied: appList.filter((a) => a.status === 'applied').length,
@@ -109,7 +103,6 @@ export default function App() {
     fetchApplications();
   }, [user, fetchApplications]);
 
-  // Fetch Dashboard Data
   const fetchDashboardData = useCallback(async () => {
     if (!user) return;
     try {
@@ -122,7 +115,6 @@ export default function App() {
         id: doc.id,
         ...doc.data(),
       }));
-
       setStats({
         total: appList.length,
         applied: appList.filter((a) => a.status === 'applied').length,
@@ -139,7 +131,6 @@ export default function App() {
     fetchDashboardData();
   }, [user, fetchDashboardData]);
 
-  // Handle sign up
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError('');
@@ -152,7 +143,6 @@ export default function App() {
     }
   };
 
-  // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -165,7 +155,6 @@ export default function App() {
     }
   };
 
-  // Handle logout
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -175,7 +164,6 @@ export default function App() {
     }
   };
 
-  // Handle CV upload
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
     if (!file || !user) return;
@@ -195,7 +183,6 @@ export default function App() {
     }
   };
 
-  // Handle CV tailor
   const handleTailorCV = async () => {
     if (!selectedCV || !jobDescription) {
       setError('Please select a CV and enter a job description');
@@ -228,7 +215,6 @@ export default function App() {
     }
   };
 
-  // Handle save tailored CV
   const handleSaveTailoredCV = async () => {
     if (!tailoredCV || !user) {
       setError('No tailored CV to save');
@@ -251,7 +237,6 @@ export default function App() {
     }
   };
 
-  // Handle job search
   const handleJobSearch = async () => {
     if (!searchJob) {
       setError('Please enter a job title');
@@ -283,7 +268,6 @@ export default function App() {
     }
   };
 
-  // Handle apply to job
   const handleApplyJob = async (job) => {
     if (!user) {
       setError('Please log in to apply');
@@ -307,7 +291,6 @@ export default function App() {
     }
   };
 
-  // Handle update application
   const handleUpdateApplication = async () => {
     if (!editingApp || !user) return;
 
@@ -324,16 +307,13 @@ export default function App() {
     }
   };
 
-  // Auth page
   if (!user) {
     return (
       <div className="auth-page">
         <div className="auth-container">
           <h1>JobRadar</h1>
           <p className="subtitle">
-            {isLogin
-              ? 'Sign in to your account'
-              : 'Create a new account'}
+            {isLogin ? 'Sign in to your account' : 'Create a new account'}
           </p>
           <form onSubmit={isLogin ? handleLogin : handleSignUp}>
             <input
@@ -373,7 +353,6 @@ export default function App() {
     );
   }
 
-  // Main app
   return (
     <div className="app">
       <div className="header">
@@ -413,7 +392,6 @@ export default function App() {
       <div className="main-content">
         {error && <p className="error">{error}</p>}
 
-        {/* CV Tab */}
         {activeTab === 'cv' && (
           <div className="tab-content">
             <h2>Upload & Tailor Your CV</h2>
@@ -490,7 +468,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Jobs Tab */}
         {activeTab === 'jobs' && (
           <div className="tab-content">
             <h2>Job Feed</h2>
@@ -569,15 +546,12 @@ export default function App() {
                   </div>
                 ))
               ) : (
-                <p className="no-results">
-                  Search for jobs to get started
-                </p>
+                <p className="no-results">Search for jobs to get started</p>
               )}
             </div>
           </div>
         )}
 
-        {/* Tracker Tab */}
         {activeTab === 'tracker' && (
           <div className="tab-content">
             <h2>Application Tracker</h2>
@@ -682,7 +656,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Dashboard Tab */}
         {activeTab === 'dashboard' && (
           <div className="tab-content">
             <h2>Dashboard</h2>
