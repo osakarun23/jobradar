@@ -1,0 +1,288 @@
+[debug] [2026-06-19T02:52:33.564Z] ----------------------------------------------------------------------
+[debug] [2026-06-19T02:52:33.570Z] Command:       /Users/amolmodgi/.nvm/versions/node/v22.18.0/bin/node /Users/amolmodgi/.nvm/versions/node/v22.18.0/bin/firebase deploy --only functions
+[debug] [2026-06-19T02:52:33.570Z] CLI Version:   15.22.0
+[debug] [2026-06-19T02:52:33.570Z] Platform:      darwin
+[debug] [2026-06-19T02:52:33.570Z] Node Version:  v22.18.0
+[debug] [2026-06-19T02:52:33.570Z] Detected Agent: unknown
+[debug] [2026-06-19T02:52:33.571Z] Time:          Thu Jun 18 2026 22:52:33 GMT-0400 (Eastern Daylight Time)
+[debug] [2026-06-19T02:52:33.571Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-06-19T02:52:34.512Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-19T02:52:34.513Z] > authorizing via signed-in user (amolmodgi@gmail.com)
+[debug] [2026-06-19T02:52:34.513Z] [iam] checking project jobsearchnk for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-06-19T02:52:34.513Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.513Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.514Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions [none]
+[debug] [2026-06-19T02:52:34.514Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions  x-goog-user-project=jobsearchnk
+[debug] [2026-06-19T02:52:34.514Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-06-19T02:52:34.697Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions 200
+[debug] [2026-06-19T02:52:34.697Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-06-19T02:52:34.697Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.697Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.697Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/jobsearchnk/serviceAccounts/jobsearchnk@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-06-19T02:52:34.697Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/jobsearchnk/serviceAccounts/jobsearchnk@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-06-19T02:52:34.871Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/jobsearchnk/serviceAccounts/jobsearchnk@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-06-19T02:52:34.871Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/jobsearchnk/serviceAccounts/jobsearchnk@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'jobsearchnk'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-06-19T02:52:34.876Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.876Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:34.876Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk [none]
+[debug] [2026-06-19T02:52:35.006Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk 200
+[debug] [2026-06-19T02:52:35.007Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk {"projectNumber":"34184283680","projectId":"jobsearchnk","lifecycleState":"ACTIVE","name":"JobSearchNK","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-06-19T01:39:55.695Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-06-19T02:52:35.010Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.010Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.010Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/jobsearchnk/adminSdkConfig [none]
+[debug] [2026-06-19T02:52:35.280Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/jobsearchnk/adminSdkConfig 200
+[debug] [2026-06-19T02:52:35.280Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/jobsearchnk/adminSdkConfig {"projectId":"jobsearchnk","storageBucket":"jobsearchnk.firebasestorage.app"}
+[debug] [2026-06-19T02:52:35.282Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.283Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.283Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs [none]
+[debug] [2026-06-19T02:52:35.562Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs 200
+[debug] [2026-06-19T02:52:35.562Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs {"configs":[{"name":"projects/jobsearchnk/configs/anthropic"}]}
+[debug] [2026-06-19T02:52:35.563Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.563Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.563Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables [none]
+[debug] [2026-06-19T02:52:35.769Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables 200
+[debug] [2026-06-19T02:52:35.769Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables {"variables":[{"name":"projects/jobsearchnk/configs/anthropic/variables/api_key","updateTime":"2026-06-19T02:39:39.074819566Z"}]}
+[debug] [2026-06-19T02:52:35.770Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.770Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:35.770Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables/api_key [none]
+[debug] [2026-06-19T02:52:36.045Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables/api_key 200
+[debug] [2026-06-19T02:52:36.046Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/jobsearchnk/configs/anthropic/variables/api_key {"name":"projects/jobsearchnk/configs/anthropic/variables/api_key","updateTime":"2026-06-19T02:39:39.074819566Z","text":"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"}
+[debug] [2026-06-19T02:52:36.055Z] Validating nodejs source
+[warn] ⚠  functions: Runtime Node.js 20 was deprecated on 2026-04-30 and will be decommissioned on 2026-10-30, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy 
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-06-19T02:52:37.168Z] > [functions] package.json contents: {
+  "name": "jobradar-functions",
+  "description": "Cloud Functions for JobRadar",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-functions": "^5.0.1",
+    "firebase-admin": "^12.0.0",
+    "@anthropic-ai/sdk": "^0.14.0"
+  }
+}
+[debug] [2026-06-19T02:52:37.168Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2026-06-19T02:52:37.169Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-06-19T02:52:37.180Z] Found firebase-functions binary at '/Users/amolmodgi/jobradar/firebase-functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8596
+
+[debug] [2026-06-19T02:52:37.802Z] Got response from /__/functions.yaml {"endpoints":{"tailorCV":{"platform":"gcfv1","labels":{},"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"callableTrigger":{},"entryPoint":"tailorCV"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2026-06-19T02:52:41.823Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:41.824Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:41.824Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/-/functions [none]
+[debug] [2026-06-19T02:52:42.443Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/-/functions 200
+[debug] [2026-06-19T02:52:42.443Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/-/functions {}
+[debug] [2026-06-19T02:52:42.444Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:42.444Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:42.445Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/jobsearchnk/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2026-06-19T02:52:43.033Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/jobsearchnk/locations/-/functions 200
+[debug] [2026-06-19T02:52:43.033Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/jobsearchnk/locations/-/functions {}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2026-06-19T02:52:43.037Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:43.037Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:43.037Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com [none]
+[debug] [2026-06-19T02:52:43.037Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com  x-goog-user-project=jobsearchnk
+[debug] [2026-06-19T02:52:43.435Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com 200
+[debug] [2026-06-19T02:52:43.435Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com [omitted]
+[warn] ⚠  extensions: missing required API firebaseextensions.googleapis.com. Enabling now... 
+[debug] [2026-06-19T02:52:43.437Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:43.437Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:43.437Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com:enable [none]
+[debug] [2026-06-19T02:52:43.437Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com:enable  x-goog-user-project=jobsearchnk
+[debug] [2026-06-19T02:52:43.984Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com:enable 200
+[debug] [2026-06-19T02:52:43.984Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/jobsearchnk/services/firebaseextensions.googleapis.com:enable [omitted]
+[debug] [2026-06-19T02:52:54.004Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-19T02:52:54.004Z] > authorizing via signed-in user (amolmodgi@gmail.com)
+[debug] [2026-06-19T02:52:54.005Z] [iam] checking project jobsearchnk for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2026-06-19T02:52:54.005Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:54.005Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:54.005Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions [none]
+[debug] [2026-06-19T02:52:54.005Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions  x-goog-user-project=jobsearchnk
+[debug] [2026-06-19T02:52:54.006Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2026-06-19T02:52:54.124Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions 200
+[debug] [2026-06-19T02:52:54.124Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2026-06-19T02:52:54.125Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:54.125Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:54.125Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/jobsearchnk/instances pageSize=100&pageToken=
+[debug] [2026-06-19T02:52:55.589Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/jobsearchnk/instances 200
+[debug] [2026-06-19T02:52:55.589Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/jobsearchnk/instances {}
+[info] i  functions: preparing firebase-functions/functions directory for uploading... 
+[info] i  functions: packaged /Users/amolmodgi/jobradar/firebase-functions/functions (1.7 KB) for uploading 
+[debug] [2026-06-19T02:52:55.612Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.612Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.612Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk [none]
+[debug] [2026-06-19T02:52:55.712Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk 200
+[debug] [2026-06-19T02:52:55.712Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/jobsearchnk {"projectNumber":"34184283680","projectId":"jobsearchnk","lifecycleState":"ACTIVE","name":"JobSearchNK","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-06-19T01:39:55.695Z"}
+[debug] [2026-06-19T02:52:55.714Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.714Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.714Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/jobsearchnk/billingInfo [none]
+[debug] [2026-06-19T02:52:55.969Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/jobsearchnk/billingInfo 200
+[debug] [2026-06-19T02:52:55.969Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/jobsearchnk/billingInfo {"name":"projects/jobsearchnk/billingInfo","projectId":"jobsearchnk","billingAccountName":"billingAccounts/010A6D-78F6B2-F97D16","billingEnabled":true}
+[debug] [2026-06-19T02:52:55.972Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.972Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:52:55.973Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2026-06-19T02:52:55.973Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions:generateUploadUrl {}
+[debug] [2026-06-19T02:53:03.835Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2026-06-19T02:53:03.835Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D"}
+[debug] [2026-06-19T02:53:03.837Z] >>> [apiv2][query] PUT https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip GoogleAccessId=service-34184283680%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D
+[debug] [2026-06-19T02:53:03.837Z] >>> [apiv2][body] PUT https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip [stream]
+[debug] [2026-06-19T02:53:04.407Z] <<< [apiv2][status] PUT https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip 200
+[debug] [2026-06-19T02:53:04.407Z] <<< [apiv2][body] PUT https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip [omitted]
+[info] ✔  functions: firebase-functions/functions source uploaded successfully 
+[info] i  functions: creating Node.js 20 (1st Gen) function tailorCV(us-central1)... 
+[debug] [2026-06-19T02:53:04.413Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:04.413Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:04.414Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions [none]
+[debug] [2026-06-19T02:53:04.414Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions {"name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","entryPoint":"tailorCV","runtime":"nodejs20","dockerRegistry":"ARTIFACT_REGISTRY","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"minInstances":null,"maxInstances":null,"ingressSettings":null,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"serviceAccountEmail":null,"availableMemoryMb":null,"timeout":null,"vpcConnector":null,"vpcConnectorEgressSettings":null,"buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}}
+[debug] [2026-06-19T02:53:06.604Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions 200
+[debug] [2026-06-19T02:53:06.605Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/functions {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:06.606Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:06.606Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:06.607Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:06.826Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:06.826Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:07.329Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:07.330Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:07.330Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:07.330Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:07.504Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:07.505Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:08.506Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:08.507Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:08.507Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:08.507Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:08.768Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:08.769Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:10.770Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:10.771Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:10.772Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:10.772Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:10.974Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:10.975Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:14.976Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:14.976Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:14.976Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:14.977Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:15.390Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:15.390Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:06.776915870Z"}}
+[debug] [2026-06-19T02:53:23.391Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:23.395Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:23.395Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:23.396Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:23.614Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:23.614Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:06.776915870Z","buildId":"aa618c7d-23aa-4640-a60b-3e58297ec6e2","buildName":"projects/34184283680/locations/us-central1/builds/aa618c7d-23aa-4640-a60b-3e58297ec6e2"}}
+[debug] [2026-06-19T02:53:33.615Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:33.616Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:33.616Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:33.616Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:34.023Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:34.024Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:06.776915870Z","buildId":"aa618c7d-23aa-4640-a60b-3e58297ec6e2","buildName":"projects/34184283680/locations/us-central1/builds/aa618c7d-23aa-4640-a60b-3e58297ec6e2"}}
+[debug] [2026-06-19T02:53:44.025Z] [create-default-us-central1-tailorCV] Retrying task index 0
+[debug] [2026-06-19T02:53:44.027Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:44.027Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:44.027Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA [none]
+[debug] [2026-06-19T02:53:44.257Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA 200
+[debug] [2026-06-19T02:53:44.258Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA {"name":"operations/cHJvamVjdHMvam9ic2VhcmNobmsvbG9jYXRpb25zL3VzLWNlbnRyYWwxL29wZXJhdGlvbnMvb3BlcmF0aW9uLTE3ODE4Mzc1ODQ4NTMtNjU0OTI2NDRhZWI3ZS02YmM1MDA4MC02Yjk5MGQ1MA","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/jobsearchnk/locations/us-central1/functions/tailorCV","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"tailorCV","updateTime":"1970-01-01T00:00:00Z","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"d56f1aa92a8207a1021f8618d274a3de78b8c7c9"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-374565722126.us-central1.cloudfunctions.appspot.com/d6788dbd-964f-4603-8c0f-72ce6a2efefc.zip?GoogleAccessId=service-34184283680@gcf-admin-robot.iam.gserviceaccount.com&Expires=1781839383&Signature=PLet75gQv56GEhsQCEGYkIEZmJ6KwF2AfWP0pYmA0lRYYHGqx6DtJSay%2B0cL2f%2BpTE0pu2P4OaAsHHPdSMcu%2F5lcUDJnCnHUmXThl09X5HMvCIwBHEZDMA1IbYVOj3VpuEA9DYqWhYIMNNPoUOkx6MD5oQCWShz1asRS05CZkvFGpHCe9XpuzaX1LaNxKgHBUjHw9tjixJ6kLO1zc6XlBTTYVhZqFj6Z7laNexCgA5lAzSWmiZ7EENxCg6effQ%2FlXyH3Mm1QDyo1kCpmidWj98cz%2FH57OxAxD7WVZ1rBI2tFzAQT2ij2mmoDffo0LOHjQDY8dgFKZUIGHB1PsgWIQA%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}","GCLOUD_PROJECT":"jobsearchnk","EVENTARC_CLOUD_EVENT_SOURCE":"projects/jobsearchnk/locations/us-central1/functions/tailorCV"},"runtime":"nodejs20","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2026-06-19T02:53:42.029817990Z","buildId":"aa618c7d-23aa-4640-a60b-3e58297ec6e2","buildName":"projects/34184283680/locations/us-central1/builds/aa618c7d-23aa-4640-a60b-3e58297ec6e2"},"done":true,"error":{"code":3,"message":"Gen1 operation for function projects/jobsearchnk/locations/us-central1/functions/tailorCV failed: Build failed: Access to bucket gcf-sources-34184283680-us-central1 denied. You must grant Storage Object Viewer permission to 34184283680-compute@developer.gserviceaccount.com. If you are using VPC Service Controls, you must also grant it access to your service perimeter.\n."}}
+[debug] [2026-06-19T02:53:44.259Z] Got source token undefined for region us-central1
+[error] Gen1 operation for function projects/jobsearchnk/locations/us-central1/functions/tailorCV failed: Build failed: Access to bucket gcf-sources-34184283680-us-central1 denied. You must grant Storage Object Viewer permission to 34184283680-compute@developer.gserviceaccount.com. If you are using VPC Service Controls, you must also grant it access to your service perimeter.
+.
+[warn] ⚠  functions: Deploys failed. Skipping deletes. 
+[debug] [2026-06-19T02:53:44.275Z] Total Function Deployment time: 39852
+[debug] [2026-06-19T02:53:44.275Z] 1 Functions Deployed
+[debug] [2026-06-19T02:53:44.275Z] 1 Functions Errored
+[debug] [2026-06-19T02:53:44.275Z] 0 Function Deployments Aborted
+[debug] [2026-06-19T02:53:44.275Z] Average Function Deployment time: 39851
+[info] 
+[info] Functions deploy had errors with the following functions:
+	tailorCV(us-central1)
+[debug] [2026-06-19T02:53:44.326Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:44.326Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:53:44.326Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts [none]
+[debug] [2026-06-19T02:53:44.499Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts 200
+[debug] [2026-06-19T02:53:44.499Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts {"name":"projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts","format":"DOCKER","description":"This repository is created and used by Cloud Functions for storing function docker images.","labels":{"goog-managed-by":"cloudfunctions"},"createTime":"2026-06-19T02:53:17.706382Z","updateTime":"2026-06-19T02:53:17.706382Z","mode":"STANDARD_REPOSITORY","vulnerabilityScanningConfig":{"lastEnableTime":"2026-06-19T02:53:09.129601785Z","enablementState":"SCANNING_DISABLED","enablementStateReason":"API containerscanning.googleapis.com is not enabled."},"satisfiesPzi":true,"registryUri":"us-central1-docker.pkg.dev/jobsearchnk/gcf-artifacts"}
+[warn] ⚠  functions: No cleanup policy detected for repositories in us-central1. This may result in a small monthly bill as container images accumulate over time. 
+[info] i  functions: Configuring cleanup policy for repository in us-central1. Images older than 1 days will be automatically deleted. 
+[debug] [2026-06-19T02:54:02.540Z] Setting up artifact cleanup policy for region us-central1
+[debug] [2026-06-19T02:54:02.541Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:54:02.541Z] Checked if tokens are valid: true, expires at: 1781840271424
+[debug] [2026-06-19T02:54:02.541Z] >>> [apiv2][query] PATCH https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts updateMask=name%2CcleanupPolicies%2CcleanupPolicyDryRun%2Clabels
+[debug] [2026-06-19T02:54:02.541Z] >>> [apiv2][body] PATCH https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts {"name":"projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts","cleanupPolicies":{"firebase-functions-cleanup":{"id":"firebase-functions-cleanup","condition":{"tagState":"ANY","olderThan":"86400s"},"action":"DELETE"}},"cleanupPolicyDryRun":false,"labels":{"goog-managed-by":"cloudfunctions"}}
+[debug] [2026-06-19T02:54:02.832Z] <<< [apiv2][status] PATCH https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts 200
+[debug] [2026-06-19T02:54:02.832Z] <<< [apiv2][body] PATCH https://artifactregistry.googleapis.com/v1/projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts {"name":"projects/jobsearchnk/locations/us-central1/repositories/gcf-artifacts","format":"DOCKER","description":"This repository is created and used by Cloud Functions for storing function docker images.","labels":{"goog-managed-by":"cloudfunctions"},"createTime":"2026-06-19T02:53:17.706382Z","updateTime":"2026-06-19T02:54:02.999613Z","mode":"STANDARD_REPOSITORY","cleanupPolicies":{"firebase-functions-cleanup":{"id":"firebase-functions-cleanup","action":"DELETE","condition":{"tagState":"ANY","olderThan":"86400s"}}},"vulnerabilityScanningConfig":{"lastEnableTime":"2026-06-19T02:53:09.129601785Z","enablementState":"SCANNING_DISABLED","enablementStateReason":"API containerscanning.googleapis.com is not enabled."},"satisfiesPzi":true}
+[info] i  functions: Configured cleanup policy for repository in us-central1. 
+[debug] [2026-06-19T02:54:02.833Z] Functions deploy failed.
+[debug] [2026-06-19T02:54:02.833Z] {
+  "endpoint": {
+    "id": "tailorCV",
+    "project": "jobsearchnk",
+    "region": "us-central1",
+    "entryPoint": "tailorCV",
+    "platform": "gcfv1",
+    "runtime": "nodejs20",
+    "callableTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"jobsearchnk\",\"storageBucket\":\"jobsearchnk.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "jobsearchnk",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/jobsearchnk/locations/us-central1/functions/tailorCV"
+    },
+    "codebase": "default",
+    "targetedByOnly": false,
+    "hash": "d56f1aa92a8207a1021f8618d274a3de78b8c7c9"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "exit": 1,
+    "message": "Gen1 operation for function projects/jobsearchnk/locations/us-central1/functions/tailorCV failed: Build failed: Access to bucket gcf-sources-34184283680-us-central1 denied. You must grant Storage Object Viewer permission to 34184283680-compute@developer.gserviceaccount.com. If you are using VPC Service Controls, you must also grant it access to your service perimeter.\n.",
+    "original": {
+      "code": 3,
+      "message": "Gen1 operation for function projects/jobsearchnk/locations/us-central1/functions/tailorCV failed: Build failed: Access to bucket gcf-sources-34184283680-us-central1 denied. You must grant Storage Object Viewer permission to 34184283680-compute@developer.gserviceaccount.com. If you are using VPC Service Controls, you must also grant it access to your service perimeter.\n."
+    },
+    "status": 3,
+    "code": 3
+  }
+}
+[debug] [2026-06-19T02:54:02.883Z] Error: Failed to create function tailorCV in region us-central1
+    at /Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:54:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Fabricator.createV1Function (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:207:32)
+    at async Fabricator.createEndpoint (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:150:13)
+    at async Fabricator.wrapOperation (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:138:13)
+    at async Promise.all (index 0)
+    at async Promise.allSettled (index 0)
+    at async Fabricator.applyPlan (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:77:45)
+    at async release (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/index.js:86:21)
+    at async chain (/Users/amolmodgi/.nvm/versions/node/v22.18.0/lib/node_modules/firebase-tools/lib/deploy/index.js:45:9)
+[error] 
+[error] Error: There was an error deploying functions
