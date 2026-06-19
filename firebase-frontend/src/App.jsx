@@ -18,6 +18,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { firebaseConfig } from './firebase-config';
+import { generateTailoredCVPDF } from './pdfGenerator';
 import './App.css';
 
 const app = initializeApp(firebaseConfig);
@@ -35,12 +36,16 @@ export default function App() {
   const [selectedCV, setSelectedCV] = useState(null);
   const [jobDescription, setJobDescription] = useState('');
   const [tailoredCV, setTailoredCV] = useState('');
+  const [tailoredForJob, setTailoredForJob] = useState(null);
   const [applications, setApplications] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [searchJob, setSearchJob] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
+  const [searchIndustry, setSearchIndustry] = useState('');
+  const [searchDaysOld, setSearchDaysOld] = useState('15');
   const [expandedJobs, setExpandedJobs] = useState({});
   const [editingApp, setEditingApp] = useState(null);
+  const [pendingJobApplication, setPendingJobApplication] = useState(null);
   const [stats, setStats] = useState({
     total: 0,
     applied: 0,
@@ -105,27 +110,8 @@ export default function App() {
 
   const fetchDashboardData = useCallback(async () => {
     if (!user) return;
-    try {
-      const q = query(
-        collection(db, 'applications'),
-        where('userId', '==', user.uid)
-      );
-      const snapshot = await getDocs(q);
-      const appList = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setStats({
-        total: appList.length,
-        applied: appList.filter((a) => a.status === 'applied').length,
-        interviewing: appList.filter((a) => a.status === 'interviewing')
-          .length,
-        rejected: appList.filter((a) => a.status === 'rejected').length,
-      });
-    } catch (err) {
-      console.error('Error fetching dashboard data:', err);
-    }
-  }, [user]);
+    await fetchApplications();
+  }, [user, fetchApplications]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -205,13 +191,31 @@ export default function App() {
       );
 
       if (!response.ok) {
-        throw new Error('Failed to tailor CV');
+        throw new Error('Failed to tailor CV. Cloud Functions may not be available.');
       }
 
       const data = await response.json();
       setTailoredCV(data.tailoredCV);
     } catch (err) {
       setError('Error tailoring CV: ' + err.message);
+    }
+  };
+
+  const handleDownloadTailoredCV = () => {
+    if (!tailoredCV || !tailoredForJob) {
+      setError('No tailored CV to download');
+      return;
+    }
+
+    try {
+      generateTailoredCVPDF(
+        tailoredCV,
+        tailoredForJob.jobTitle,
+        tailoredForJob.company
+      );
+      setError('');
+    } catch (err) {
+      setError('Error generating PDF: ' + err.message);
     }
   };
 
@@ -231,10 +235,24 @@ export default function App() {
       });
       setError('');
       setTailoredCV('');
+      setTailoredForJob(null);
       fetchCVs();
     } catch (err) {
       setError('Error saving CV: ' + err.message);
     }
+  };
+
+  // Filter jobs by date
+  const filterJobsByDate = (jobsList) => {
+    const daysOld = parseInt(searchDaysOld) || 15;
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - daysOld);
+
+    return jobsList.filter((job) => {
+      if (!job.job_posted_at_datetime) return true;
+      const jobDate = new Date(job.job_posted_at_datetime);
+      return jobDate >= cutoffDate;
+    });
   };
 
   const handleJobSearch = async () => {
@@ -245,7 +263,10 @@ export default function App() {
 
     setError('');
     try {
-      const query = `${searchJob}${searchLocation ? ` in ${searchLocation}` : ''}`;
+      let query = `${searchJob}`;
+      if (searchLocation) query += ` in ${searchLocation}`;
+      if (searchIndustry) query += ` ${searchIndustry}`;
+
       const response = await fetch(
         `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(query)}&page=1&num_pages=1`,
         {
@@ -262,32 +283,117 @@ export default function App() {
       }
 
       const data = await response.json();
-      setJobs(data.data || []);
+      const filteredJobs = filterJobsByDate(data.data || []);
+      setJobs(filteredJobs);
+
+      if (filteredJobs.length === 0) {
+        setError(`No jobs found posted in the last ${searchDaysOld} days`);
+      }
     } catch (err) {
       setError('Error searching jobs: ' + err.message);
     }
   };
 
-  const handleApplyJob = async (job) => {
+  const handleAutoTailorJob = async (job) => {
+    if (!selectedCV) {
+      setError('Please select a CV first');
+      return;
+    }
+
+    setJobDescription(job.job_description);
+    setTailoredForJob({ jobTitle: job.job_title, company: job.employer_name });
+
+    // Auto-tailor
+    try {
+      const cvContent = selectedCV.content;
+      const response = await fetch(
+        `https://us-central1-jobsearchnk.cloudfunctions.net/tailorCV`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cvContent,
+            jobDescription: job.job_description,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to tailor CV');
+      }
+
+      const data = await response.json();
+      setTailoredCV(data.tailoredCV);
+
+      // Show confirmation dialog
+      const confirmed = window.confirm(
+        `Ready to apply to ${job.job_title} at ${job.employer_name}?\n\nYour resume has been tailored. Click OK to confirm application and download PDF.`
+      );
+
+      if (confirmed) {
+        handleDownloadTailoredCV();
+        setPendingJobApplication(job);
+      }
+    } catch (err) {
+      setError('Error tailoring CV: ' + err.message);
+    }
+  };
+
+  const handleConfirmApplication = async () => {
+    if (!pendingJobApplication || !user) return;
+
+    try {
+      await addDoc(collection(db, 'applications'), {
+        userId: user.uid,
+        jobTitle: pendingJobApplication.job_title,
+        company: pendingJobApplication.employer_name,
+        jobUrl: pendingJobApplication.job_apply_link,
+        status: 'applied',
+        appliedAt: new Date(),
+        notes: 'Applied with tailored resume',
+      });
+
+      setError('');
+      setPendingJobApplication(null);
+      setTailoredCV('');
+      setTailoredForJob(null);
+      setJobDescription('');
+      fetchApplications();
+
+      // Show confirmation
+      window.alert('Application saved to tracker!');
+    } catch (err) {
+      setError('Error saving application: ' + err.message);
+    }
+  };
+
+  const handleApplyJobManual = async (job) => {
     if (!user) {
       setError('Please log in to apply');
       return;
     }
 
-    try {
-      await addDoc(collection(db, 'applications'), {
-        userId: user.uid,
-        jobTitle: job.job_title,
-        company: job.employer_name,
-        jobUrl: job.job_apply_link,
-        status: 'applied',
-        appliedAt: new Date(),
-        notes: '',
-      });
-      setError('');
-      fetchApplications();
-    } catch (err) {
-      setError('Error saving application: ' + err.message);
+    const confirmed = window.confirm(
+      `Apply to ${job.job_title} at ${job.employer_name}?`
+    );
+
+    if (confirmed) {
+      try {
+        await addDoc(collection(db, 'applications'), {
+          userId: user.uid,
+          jobTitle: job.job_title,
+          company: job.employer_name,
+          jobUrl: job.job_apply_link,
+          status: 'applied',
+          appliedAt: new Date(),
+          notes: '',
+        });
+        setError('');
+        fetchApplications();
+        window.alert('Application saved to tracker!');
+      } catch (err) {
+        setError('Error saving application: ' + err.message);
+      }
     }
   };
 
@@ -453,12 +559,18 @@ export default function App() {
                 <h3>Tailored CV Preview</h3>
                 <div className="cv-preview-content">{tailoredCV}</div>
                 <div className="action-buttons">
+                  <button className="btn-primary" onClick={handleDownloadTailoredCV}>
+                    Download as PDF
+                  </button>
                   <button className="btn-primary" onClick={handleSaveTailoredCV}>
-                    Save Tailored CV
+                    Save CV Version
                   </button>
                   <button
                     className="btn-secondary"
-                    onClick={() => setTailoredCV('')}
+                    onClick={() => {
+                      setTailoredCV('');
+                      setTailoredForJob(null);
+                    }}
                   >
                     Close
                   </button>
@@ -485,11 +597,31 @@ export default function App() {
                   value={searchLocation}
                   onChange={(e) => setSearchLocation(e.target.value)}
                 />
+                <input
+                  type="text"
+                  placeholder="Industry (optional)"
+                  value={searchIndustry}
+                  onChange={(e) => setSearchIndustry(e.target.value)}
+                />
+                <input
+                  type="number"
+                  placeholder="Days old (default: 15)"
+                  value={searchDaysOld}
+                  onChange={(e) => setSearchDaysOld(e.target.value)}
+                  min="1"
+                  max="90"
+                />
                 <button className="btn-primary" onClick={handleJobSearch}>
                   Search
                 </button>
               </div>
             </div>
+
+            {jobs.length > 0 && (
+              <p style={{ color: '#9ca3af', marginBottom: '1rem' }}>
+                Found {jobs.length} jobs
+              </p>
+            )}
 
             <div className="jobs-list">
               {jobs.length > 0 ? (
@@ -528,9 +660,15 @@ export default function App() {
                         <div className="job-actions">
                           <button
                             className="btn-primary"
-                            onClick={() => handleApplyJob(job)}
+                            onClick={() => handleAutoTailorJob(job)}
                           >
-                            Apply & Track
+                            Tailor & Apply
+                          </button>
+                          <button
+                            className="btn-secondary"
+                            onClick={() => handleApplyJobManual(job)}
+                          >
+                            Quick Apply
                           </button>
                           
                             href={job.job_apply_link}
@@ -546,7 +684,9 @@ export default function App() {
                   </div>
                 ))
               ) : (
-                <p className="no-results">Search for jobs to get started</p>
+                <p className="no-results">
+                  Search for jobs to get started
+                </p>
               )}
             </div>
           </div>
@@ -555,6 +695,40 @@ export default function App() {
         {activeTab === 'tracker' && (
           <div className="tab-content">
             <h2>Application Tracker</h2>
+            {pendingJobApplication && (
+              <div
+                style={{
+                  backgroundColor: '#1e293b',
+                  border: '1px solid #fbbf24',
+                  borderRadius: '6px',
+                  padding: '1.5rem',
+                  marginBottom: '2rem',
+                }}
+              >
+                <h3 style={{ color: '#fbbf24' }}>
+                  Pending: {pendingJobApplication.job_title}
+                </h3>
+                <p style={{ color: '#9ca3af', marginBottom: '1rem' }}>
+                  PDF has been downloaded. After applying on the company website, click
+                  "Confirm Applied" below.
+                </p>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <button
+                    className="btn-primary"
+                    onClick={handleConfirmApplication}
+                  >
+                    Confirm Applied
+                  </button>
+                  <button
+                    className="btn-secondary"
+                    onClick={() => setPendingJobApplication(null)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="tracker-list">
               {applications.length > 0 ? (
                 applications.map((app) => (
