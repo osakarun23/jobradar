@@ -43,6 +43,9 @@ export default function App() {
   const [searchLocation, setSearchLocation] = useState('');
   const [searchIndustry, setSearchIndustry] = useState('');
   const [searchDaysOld, setSearchDaysOld] = useState('15');
+  const [lastSearchTime, setLastSearchTime] = useState(null);
+  const [lastSearchQuery, setLastSearchQuery] = useState('');
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [expandedJobs, setExpandedJobs] = useState({});
   const [editingApp, setEditingApp] = useState(null);
   const [pendingJobApplication, setPendingJobApplication] = useState(null);
@@ -52,6 +55,25 @@ export default function App() {
     interviewing: 0,
     rejected: 0,
   });
+
+  // Load persisted search from localStorage on mount
+  useEffect(() => {
+    const savedSearch = localStorage.getItem('jobSearch');
+    if (savedSearch) {
+      try {
+        const { searchJob: sj, searchLocation: sl, searchIndustry: si, searchDaysOld: sd, jobs: j, lastSearchTime: lst, lastSearchQuery: lsq } = JSON.parse(savedSearch);
+        setSearchJob(sj);
+        setSearchLocation(sl);
+        setSearchIndustry(si);
+        setSearchDaysOld(sd);
+        setJobs(j);
+        setLastSearchTime(lst);
+        setLastSearchQuery(lsq);
+      } catch (err) {
+        console.log('Could not load saved search');
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -108,15 +130,6 @@ export default function App() {
     fetchApplications();
   }, [user, fetchApplications]);
 
-  const fetchDashboardData = useCallback(async () => {
-    if (!user) return;
-    await fetchApplications();
-  }, [user, fetchApplications]);
-
-  useEffect(() => {
-    fetchDashboardData();
-  }, [user, fetchDashboardData]);
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError('');
@@ -145,6 +158,7 @@ export default function App() {
     try {
       await signOut(auth);
       setActiveTab('cv');
+      localStorage.removeItem('jobSearch');
     } catch (err) {
       setError(err.message);
     }
@@ -242,7 +256,6 @@ export default function App() {
     }
   };
 
-  // Filter jobs by date
   const filterJobsByDate = (jobsList) => {
     const daysOld = parseInt(searchDaysOld) || 15;
     const cutoffDate = new Date();
@@ -262,6 +275,7 @@ export default function App() {
     }
 
     setError('');
+    setIsSearchLoading(true);
     try {
       let query = `${searchJob}`;
       if (searchLocation) query += ` in ${searchLocation}`;
@@ -285,13 +299,40 @@ export default function App() {
       const data = await response.json();
       const filteredJobs = filterJobsByDate(data.data || []);
       setJobs(filteredJobs);
+      setLastSearchTime(new Date().toLocaleString());
+      setLastSearchQuery(query);
+
+      // Save to localStorage
+      localStorage.setItem('jobSearch', JSON.stringify({
+        searchJob,
+        searchLocation,
+        searchIndustry,
+        searchDaysOld,
+        jobs: filteredJobs,
+        lastSearchTime: new Date().toLocaleString(),
+        lastSearchQuery: query,
+      }));
 
       if (filteredJobs.length === 0) {
         setError(`No jobs found posted in the last ${searchDaysOld} days`);
       }
     } catch (err) {
       setError('Error searching jobs: ' + err.message);
+    } finally {
+      setIsSearchLoading(false);
     }
+  };
+
+  const handleClearSearch = () => {
+    setJobs([]);
+    setSearchJob('');
+    setSearchLocation('');
+    setSearchIndustry('');
+    setSearchDaysOld('15');
+    setLastSearchTime(null);
+    setLastSearchQuery('');
+    setError('');
+    localStorage.removeItem('jobSearch');
   };
 
   const handleAutoTailorJob = async (job) => {
@@ -303,7 +344,6 @@ export default function App() {
     setJobDescription(job.job_description);
     setTailoredForJob({ jobTitle: job.job_title, company: job.employer_name });
 
-    // Auto-tailor
     try {
       const cvContent = selectedCV.content;
       const response = await fetch(
@@ -325,7 +365,6 @@ export default function App() {
       const data = await response.json();
       setTailoredCV(data.tailoredCV);
 
-      // Show confirmation dialog
       const confirmed = window.confirm(
         `Ready to apply to ${job.job_title} at ${job.employer_name}?\n\nYour resume has been tailored. Click OK to confirm application and download PDF.`
       );
@@ -360,7 +399,6 @@ export default function App() {
       setJobDescription('');
       fetchApplications();
 
-      // Show confirmation
       window.alert('Application saved to tracker!');
     } catch (err) {
       setError('Error saving application: ' + err.message);
@@ -611,16 +649,42 @@ export default function App() {
                   min="1"
                   max="90"
                 />
-                <button className="btn-primary" onClick={handleJobSearch}>
-                  Search
+                <button className="btn-primary" onClick={handleJobSearch} disabled={isSearchLoading}>
+                  {isSearchLoading ? 'Searching...' : 'Search'}
                 </button>
               </div>
             </div>
 
             {jobs.length > 0 && (
-              <p style={{ color: '#9ca3af', marginBottom: '1rem' }}>
-                Found {jobs.length} jobs
-              </p>
+              <div style={{ 
+                backgroundColor: '#1e293b', 
+                border: '1px solid #4ade80', 
+                borderRadius: '6px', 
+                padding: '1rem', 
+                marginBottom: '1.5rem' 
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <p style={{ color: '#4ade80', fontWeight: 'bold', margin: '0 0 0.5rem 0' }}>
+                      ✓ Results Cached
+                    </p>
+                    <p style={{ color: '#9ca3af', margin: '0 0 0.25rem 0' }}>
+                      Found {jobs.length} jobs
+                    </p>
+                    <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0' }}>
+                      Last searched: {lastSearchTime}
+                    </p>
+                    {lastSearchQuery && (
+                      <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0.25rem 0 0 0' }}>
+                        Query: "{lastSearchQuery}"
+                      </p>
+                    )}
+                  </div>
+                  <button className="btn-secondary" onClick={handleClearSearch}>
+                    Clear Results
+                  </button>
+                </div>
+              </div>
             )}
 
             <div className="jobs-list">
